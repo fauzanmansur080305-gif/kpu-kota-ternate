@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Models\Tamu;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 use ZipArchive;
@@ -41,13 +42,14 @@ class GuestWorkbookExporter
             $imageNumber = 1;
 
             foreach ($tamus as $tamu) {
+                $documentationPath = $tamu->documentationPath();
                 $images = [
                     [
                         'imageData' => $this->signatureBytes($tamu->paraf),
                         'column' => 8,
                     ],
                     [
-                        'imageData' => $this->storedImageBytes($tamu->documentationPath()),
+                        'imageData' => $this->storedImageBytes($documentationPath),
                         'column' => 9,
                     ],
                 ];
@@ -62,7 +64,9 @@ class GuestWorkbookExporter
                     $tamu->tujuan,
                     $tamu->no_handphone,
                     '',
-                    $images[1]['imageData'] !== null ? 'Terlampir' : 'Tidak tersedia',
+                    $images[1]['imageData'] !== null
+                        ? 'Terlampir'
+                        : ($documentationPath === null ? 'Tidak tersedia' : 'File tidak tersedia di penyimpanan'),
                 ]);
 
                 foreach ($images as $image) {
@@ -210,7 +214,11 @@ class GuestWorkbookExporter
         $disk = Storage::disk('local');
 
         if (! $disk->exists($path)) {
-            throw new RuntimeException("Gambar dokumentasi {$path} tidak ditemukan.");
+            Log::warning('Guest workbook export skipped a missing documentation image.', [
+                'path' => $path,
+            ]);
+
+            return null;
         }
 
         $bytes = $disk->get($path);

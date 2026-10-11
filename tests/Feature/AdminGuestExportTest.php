@@ -161,6 +161,38 @@ class AdminGuestExportTest extends TestCase
         }
     }
 
+    public function test_export_continues_when_a_guest_documentation_image_is_missing(): void
+    {
+        $administrator = User::factory()->create(['role' => 'admin']);
+        $this->post(route('login.store'), [
+            'nip' => $administrator->nip,
+            'password' => 'password',
+        ])->assertRedirect(route('admin.dashboard'));
+
+        $this->createGuest('2026-10-04', 'Tamu Foto Hilang', [
+            'dokumentasi' => 'tamus/dokumentasi/foto-hilang.png',
+        ]);
+
+        $download = $this->get(route('admin.laporan.export.tamu'));
+
+        $download->assertDownload('laporan-data-tamu-'.now('Asia/Jayapura')->format('Y-m-d').'.xlsx');
+        $downloadPath = $download->baseResponse->getFile()->getPathname();
+        $archive = new ZipArchive;
+
+        try {
+            $this->assertSame(true, $archive->open($downloadPath));
+            $worksheet = $archive->getFromName('xl/worksheets/sheet1.xml');
+            $this->assertIsString($worksheet);
+            $this->assertStringContainsString('Tamu Foto Hilang', $worksheet);
+            $this->assertStringContainsString('File tidak tersedia di penyimpanan', $worksheet);
+        } finally {
+            $archive->close();
+            if (is_file($downloadPath)) {
+                unlink($downloadPath);
+            }
+        }
+    }
+
     private function createGuest(string $date, string $name, array $media = []): Tamu
     {
         return Tamu::create(array_replace([
