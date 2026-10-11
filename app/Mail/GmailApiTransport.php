@@ -61,10 +61,15 @@ class GmailApiTransport extends AbstractTransport
         if (! $sendResponse->successful()) {
             Log::error('Gmail API rejected an outgoing message.', [
                 'status' => $sendResponse->status(),
+                'reason' => $sendResponse->json('error.message'),
             ]);
 
             throw new RuntimeException('Gmail API gagal mengirim email pemulihan kata sandi.');
         }
+
+        Log::info('Gmail API accepted an outgoing message.', [
+            'message_id' => $sendResponse->json('id'),
+        ]);
     }
 
     public function __toString(): string

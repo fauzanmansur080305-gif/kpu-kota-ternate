@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -36,7 +37,11 @@ class PasswordResetController extends Controller
             ->where('role', 'admin')
             ->first();
 
-        if ($administratorExists !== null) {
+        if ($administratorExists === null) {
+            Log::info('Password recovery email request was not sent.', [
+                'reason' => 'email_not_registered_as_administrator',
+            ]);
+        } else {
             if (in_array(config('mail.default'), ['log', 'array'], true)) {
                 return redirect()
                     ->route('password.request')
@@ -71,6 +76,10 @@ class PasswordResetController extends Controller
 
                     throw $exception;
                 }
+            } else {
+                Log::info('Password recovery email request was not sent.', [
+                    'reason' => 'code_request_cooldown',
+                ]);
             }
         }
 

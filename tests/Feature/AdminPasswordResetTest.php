@@ -10,6 +10,7 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
 use Tests\TestCase;
@@ -118,6 +119,7 @@ class AdminPasswordResetTest extends TestCase
                 'id' => 'sent-message-id',
             ]),
         ]);
+        Log::spy();
 
         $this->post(route('password.email'), ['email' => $administrator->email])
             ->assertRedirect(route('password.reset', ['email' => $administrator->email]))
@@ -156,6 +158,9 @@ class AdminPasswordResetTest extends TestCase
         $this->assertStringContainsString('cid:logo-kpu@kpu-kotaternate', $sentMime);
         $this->assertStringContainsString('Kode ini berlaku selama', $sentMime);
         $this->assertDatabaseHas('password_reset_tokens', ['email' => $administrator->email]);
+        Log::shouldHaveReceived('info')->with('Gmail API accepted an outgoing message.', [
+            'message_id' => 'sent-message-id',
+        ]);
     }
 
     public function test_administrator_can_login_with_the_email_code_and_update_password_from_settings(): void
