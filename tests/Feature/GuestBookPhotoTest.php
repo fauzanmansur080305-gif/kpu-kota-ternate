@@ -32,7 +32,18 @@ class GuestBookPhotoTest extends TestCase
             ->assertSee('id="chooseGuestPhoto"', false)
             ->assertSee('navigator.mediaDevices.getUserMedia', false)
             ->assertSee('capture="environment"', false)
-            ->assertSee('foto akan disimpan bersama data kunjungan.', false);
+            ->assertSee('foto akan disimpan bersama data kunjungan.', false)
+            ->assertSee('id="kpuLoading"', false)
+            ->assertSee('window.kpuLoading.show();', false)
+            ->assertSee('window.kpuLoading.hide();', false)
+            ->assertSee('src="'.asset('kpu-logo.png').'"', false);
+    }
+
+    public function test_login_page_uses_the_kpu_application_icon(): void
+    {
+        $this->get(route('login'))
+            ->assertOk()
+            ->assertSee('type="image/png" href="'.asset('kpu-logo.png').'?v=20261012"', false);
     }
 
     public function test_public_guest_form_saves_optional_documentation_photos(): void

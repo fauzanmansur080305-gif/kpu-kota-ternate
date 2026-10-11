@@ -80,7 +80,7 @@
 
 <div class="kpu-loading" id="kpuLoading" role="status" aria-live="polite" aria-label="Sedang memuat" aria-hidden="true">
     <div class="kpu-loading__logo-wrap">
-        <img class="kpu-loading__logo" src="https://www.kpu.go.id/img/logo-kpu.png" alt="Logo KPU">
+        <img class="kpu-loading__logo" src="{{ asset('kpu-logo.png') }}" alt="Logo KPU">
     </div>
 </div>
 
@@ -102,6 +102,11 @@
             loading.classList.remove('is-visible');
             loading.setAttribute('aria-hidden', 'true');
         }
+
+        window.kpuLoading = {
+            show: showLoading,
+            hide: hideLoading,
+        };
 
         if (document.readyState !== 'complete') {
             showLoading();

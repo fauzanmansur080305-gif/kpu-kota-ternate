@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=20261005">
+    <link rel="icon" type="image/png" href="{{ asset('kpu-logo.png') }}?v=20261012">
     <title>Login | KPU Kota Ternate</title>
     <style>
         :root {
@@ -238,7 +238,7 @@
     <main class="login-shell" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
         <a class="close-link" id="closeLogin" href="{{ route('home') }}" aria-label="Tutup login">&times;</a>
         <section class="login-intro">
-            <img class="logo-mark" src="https://www.kpu.go.id/img/logo-kpu.png" alt="Logo KPU">
+            <img class="logo-mark" src="{{ asset('kpu-logo.png') }}" alt="Logo KPU">
             <h1>Komisi Pemilihan Umum<br>Kota Ternate</h1>
             <p>Sistem informasi buku tamu, absensi, dan pelayanan KPU Kota Ternate.</p>
             <span class="tag">Sistem Informasi KPU</span>

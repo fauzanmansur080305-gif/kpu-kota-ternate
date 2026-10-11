@@ -2819,6 +2819,8 @@
             continueVisit.disabled = true;
 
             try {
+                window.kpuLoading.show();
+
                 const response = await fetch(guestBookForm.action, {
                     method: 'POST',
                     body: new FormData(guestBookForm),
@@ -2838,6 +2840,7 @@
             } catch (error) {
                 showVisitFeedback('error', 'Kunjungan gagal disimpan', error.message || 'Terjadi kesalahan. Silakan coba lagi.');
             } finally {
+                window.kpuLoading.hide();
                 continueVisit.disabled = false;
             }
         });
