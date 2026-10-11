@@ -41,7 +41,7 @@ class PasswordResetController extends Controller
                 return redirect()
                     ->route('password.request')
                     ->withErrors([
-                        'email' => 'Pengiriman email belum aktif. Atur SMTP Gmail pada file .env sebelum meminta kode.',
+                        'email' => 'Pengiriman email belum aktif. Atur konfigurasi mail pada environment aplikasi sebelum meminta kode.',
                     ]);
             }
 

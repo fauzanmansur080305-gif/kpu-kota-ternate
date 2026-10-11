@@ -63,6 +63,7 @@ class AdminGuestExportTest extends TestCase
             $this->assertNotFalse($archive->getFromName('xl/drawings/drawing1.xml'));
             $this->assertNotFalse($archive->getFromName('xl/media/image1.png'));
             $this->assertNotFalse($archive->getFromName('xl/media/image2.png'));
+            $this->assertSame($png, $archive->getFromName('xl/media/image2.png'));
             $this->assertStringContainsString('Tamu Laporan', $archive->getFromName('xl/worksheets/sheet1.xml'));
             $this->assertStringContainsString('Dokumentasi', $archive->getFromName('xl/worksheets/sheet1.xml'));
             $this->assertStringContainsString('J3', $archive->getFromName('xl/worksheets/sheet1.xml'));
