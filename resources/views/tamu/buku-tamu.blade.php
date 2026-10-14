@@ -1170,25 +1170,66 @@
 
         .guest-camera__card {
             width: min(640px, 100%);
-            padding: 22px;
-            border-radius: 16px;
-            background: white;
-            box-shadow: 0 24px 60px rgba(7, 26, 54, .28);
+            padding: 26px;
+            border: 1px solid rgba(255, 255, 255, .72);
+            border-radius: 20px;
+            background: linear-gradient(145deg, #fff, #f7f9fc);
+            box-shadow: 0 28px 80px rgba(7, 26, 54, .36), 0 4px 14px rgba(7, 26, 54, .12);
         }
 
         .guest-camera__card h2 {
-            margin: 0 0 16px;
+            margin: 0 0 18px;
             color: #263954;
-            font-size: 18px;
+            font-size: 19px;
+            letter-spacing: -.25px;
         }
 
         .guest-camera__card video {
             display: block;
             width: 100%;
-            max-height: 65vh;
-            border-radius: 10px;
+            max-height: 62vh;
+            border: 1px solid #d9e2ec;
+            border-radius: 14px;
             background: #111827;
             object-fit: contain;
+            box-shadow: 0 8px 20px rgba(18, 42, 69, .12);
+        }
+
+        .guest-camera__card .guest-photo-actions {
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .guest-camera__card .guest-photo-button {
+            min-height: 46px;
+            padding: 11px 18px;
+            border-radius: 12px;
+            box-shadow: 0 5px 12px rgba(49, 95, 141, .12);
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+
+        .guest-camera__card .guest-photo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 17px rgba(49, 95, 141, .2);
+        }
+
+        .guest-camera__card .guest-photo-button:focus-visible {
+            outline: 3px solid rgba(49, 95, 141, .3);
+            outline-offset: 3px;
+        }
+
+        .guest-camera__card .guest-photo-button--secondary {
+            border-color: #d6e1ed;
+            color: #315f8d;
+            background: #fff;
+        }
+
+        @media (max-width: 520px) {
+            .guest-camera { padding: 14px; }
+            .guest-camera__card { padding: 19px; }
+            .guest-camera__card .guest-photo-actions { justify-content: stretch; gap: 9px; margin-top: 16px; }
+            .guest-camera__card .guest-photo-button { flex: 1 1 100%; }
         }
 
         .input-wrap {
@@ -2676,10 +2717,25 @@
     const guestCameraDialog = document.getElementById('guestCameraDialog');
     const guestCameraPreview = document.getElementById('guestCameraPreview');
     const guestCameraCanvas = document.getElementById('guestCameraCanvas');
+    const signatureCanvas = document.getElementById('signaturePad');
     let feedbackTimer;
     let confirmedSubmit = false;
     let guestCameraStream;
     let guestCameraFacingMode = 'environment';
+
+    function clearSignaturePad() {
+        if (!signatureCanvas) {
+            return;
+        }
+
+        const context = signatureCanvas.getContext('2d');
+        context.save();
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+        context.restore();
+
+        document.getElementById('signatureInput').value = '';
+    }
 
     function setGuestPhoto(file) {
         if (!file) {
@@ -2905,7 +2961,9 @@
                 }
 
                 guestBookForm.reset();
+                clearSignaturePad();
                 guestPhotoSelection.textContent = 'Belum ada foto dipilih.';
+                guestCameraPhoto.value = '';
                 updateOtherPurposeField();
                 openVisitSuccess();
             } catch (error) {
@@ -3102,7 +3160,7 @@
        PARAF DIGITAL
     ========================= */
 
-    const canvas = document.getElementById('signaturePad');
+    const canvas = signatureCanvas;
 
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -3201,18 +3259,7 @@
 
 
     document.getElementById('clearSignature')
-        .addEventListener('click', function () {
-
-            ctx.clearRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-            document.getElementById('signatureInput').value = '';
-
-        });
+        .addEventListener('click', clearSignaturePad);
     }
 
 </script>

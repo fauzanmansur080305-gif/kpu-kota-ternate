@@ -133,9 +133,16 @@
         .crumb .dashboard-title { margin: 0; padding-left: 13px; border-left: 3px solid var(--gold); color: var(--navy); font-size: 15px; font-weight: 900; letter-spacing: .15px; }
         .top-actions { display: flex; align-items: center; gap: 12px; }
         .admin-label { padding: 10px 15px; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; color: white; background: rgba(42,15,4,.22); font-size: 12px; font-weight: 800; letter-spacing: .3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
-        .dashboard-time { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 20px 34px 0; padding: 14px 18px; border: 1px solid rgba(184,134,11,.2); border-radius: 14px; color: #5e351d; background: linear-gradient(105deg, #fffaf0, #fff 56%, #fff4e7); box-shadow: 0 8px 22px rgba(74,30,14,.06); }
-        .dashboard-time-label { color: #9a6b18; font-size: 10px; font-weight: 900; letter-spacing: 1.1px; text-transform: uppercase; }
-        .dashboard-time-value { font-size: 13px; font-weight: 800; }
+        .dashboard-time { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 92px; margin: 20px 34px 0; padding: 18px 24px; overflow: hidden; border: 1px solid rgba(226,192,105,.32); border-radius: 18px; color: #fff; background: radial-gradient(circle at 90% 15%, rgba(226,192,105,.2), transparent 17rem), linear-gradient(115deg, #3b1018, #651b2a 58%, #3b1018); box-shadow: 0 14px 32px rgba(59,16,24,.18), inset 0 1px 0 rgba(255,255,255,.08); }
+        .dashboard-time::after { position: absolute; right: -32px; bottom: -76px; width: 190px; height: 190px; border: 1px solid rgba(226,192,105,.14); border-radius: 50%; box-shadow: 0 0 0 18px rgba(226,192,105,.035), 0 0 0 38px rgba(226,192,105,.025); content: ""; pointer-events: none; }
+        .dashboard-time-info { display: flex; align-items: center; gap: 14px; }
+        .dashboard-time-icon { display: grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 1px solid rgba(226,192,105,.4); border-radius: 14px; color: #f1d27b; background: rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.1); }
+        .dashboard-time-icon svg { width: 22px; height: 22px; }
+        .dashboard-time-label { display: block; color: #e4c66f; font-size: 10px; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; }
+        .dashboard-date { display: block; margin-top: 6px; color: rgba(255,255,255,.76); font-size: 12px; font-weight: 600; }
+        .dashboard-clock { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 8px; padding: 8px 14px; border: 1px solid rgba(226,192,105,.28); border-radius: 13px; background: rgba(24,7,12,.22); }
+        .dashboard-time-value { color: #f4d477; font-size: clamp(22px, 3vw, 30px); font-variant-numeric: tabular-nums; font-weight: 900; letter-spacing: 1px; line-height: 1; }
+        .dashboard-time-zone { color: rgba(255,255,255,.7); font-size: 10px; font-weight: 900; letter-spacing: 1.2px; }
 
         .content { width: min(1380px, 100%); margin: 0 auto; padding: 38px 34px 46px; }
         .welcome { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 27px; padding: 3px 0 0; }
@@ -211,6 +218,21 @@
         .quick-item strong, .quick-item small { display: block; }
         .quick-item strong { font-size: 13px; }
         .quick-item small { display: block; max-width: 145px; margin-top: 6px; color: #98a6b6; font-size: 10px; line-height: 1.45; }
+        .visitor-matrix { padding: 18px; background: radial-gradient(circle at 100% 0, rgba(226,192,105,.14), transparent 12rem), linear-gradient(145deg, #3b1018, #611b2b); color: white; }
+        .visitor-matrix__total { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; padding: 2px 0 17px; }
+        .visitor-matrix__eyebrow { display: block; color: #e8ca75; font-size: 9px; font-weight: 900; letter-spacing: 1.3px; text-transform: uppercase; }
+        .visitor-matrix__number { display: block; margin-top: 7px; color: #fff; font-size: 36px; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+        .visitor-matrix__caption { display: block; margin-top: 6px; color: rgba(255,255,255,.64); font-size: 10px; }
+        .visitor-matrix__emblem { display: grid; width: 48px; height: 48px; flex: 0 0 48px; place-items: center; border: 1px solid rgba(232,202,117,.35); border-radius: 15px; color: #f1d27b; background: rgba(255,255,255,.07); }
+        .visitor-matrix__emblem svg { width: 24px; height: 24px; }
+        .visitor-matrix__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+        .visitor-matrix__cell { min-width: 0; padding: 12px; border: 1px solid rgba(255,255,255,.11); border-radius: 13px; background: rgba(255,255,255,.065); }
+        .visitor-matrix__cell-label { display: block; overflow: hidden; color: rgba(255,255,255,.7); font-size: 9px; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+        .visitor-matrix__cell-value { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 7px; }
+        .visitor-matrix__cell-value strong { color: #fff; font-size: 20px; font-weight: 900; }
+        .visitor-matrix__cell-value small { color: #e8ca75; font-size: 9px; font-weight: 800; white-space: nowrap; }
+        .visitor-matrix__track { height: 5px; margin-top: 9px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.13); }
+        .visitor-matrix__track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #b8860b, #f1d27b); }
 
         .sidebar-overlay { display: none; }
         @media (max-width: 1100px) {
@@ -220,6 +242,7 @@
             .menu-toggle { display: grid; }
             .sidebar-overlay.open { display: block; position: fixed; inset: 0; z-index: 19; background: rgba(7,26,54,.52); }
             .content { padding: 28px 24px; }
+            .dashboard-time { margin-right: 24px; margin-left: 24px; }
             .stats { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 760px) {
@@ -229,7 +252,10 @@
             .welcome { display: block; }
             .main-grid { grid-template-columns: 1fr; }
             .quick-grid { grid-template-columns: repeat(2, 1fr); }
-            .dashboard-time { align-items: flex-start; flex-direction: column; margin: 16px 16px 0; }
+            .dashboard-time { align-items: flex-start; flex-direction: column; gap: 13px; margin: 16px 16px 0; padding: 15px; }
+            .dashboard-time-info { gap: 11px; }
+            .dashboard-clock { align-self: flex-end; }
+            .visitor-matrix { padding: 15px; }
         }
         @media (max-width: 460px) {
             .stats { grid-template-columns: 1fr; }
@@ -247,8 +273,11 @@
             @include('admin.partials.success-notice', ['message' => session('password_recovery_notice')])
 
             <div class="dashboard-time" role="status">
-                <span class="dashboard-time-label">Waktu Administrator</span>
-                <time class="dashboard-time-value" id="dashboardClock" datetime="{{ now('Asia/Jayapura')->toIso8601String() }}">{{ now('Asia/Jayapura')->locale('id')->translatedFormat('l, d F Y') }} &middot; {{ now('Asia/Jayapura')->format('H:i:s') }} WIT</time>
+                <div class="dashboard-time-info">
+                    <span class="dashboard-time-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 7v5l3 2"/></svg></span>
+                    <span><span class="dashboard-time-label">Waktu Administrator</span><time class="dashboard-date" id="dashboardDate">{{ now('Asia/Jayapura')->locale('id')->translatedFormat('l, d F Y') }}</time></span>
+                </div>
+                <span class="dashboard-clock"><time class="dashboard-time-value" id="dashboardClock" datetime="{{ now('Asia/Jayapura')->toIso8601String() }}">{{ now('Asia/Jayapura')->format('H:i:s') }}</time><span class="dashboard-time-zone">WIT</span></span>
             </div>
 
             <main class="content">
@@ -262,9 +291,58 @@
                     <a class="stat-card" href="{{ route('admin.tamu.index', ['filter' => 'month']) }}"><div class="stat-top"><div><div class="stat-label">Kunjungan Bulan Ini</div><div class="stat-number">{{ $tamuBulanIni }}</div></div><div class="stat-icon amber"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 3v5h5M8 12h8M8 16h8"/></svg></div></div><div class="stat-meta"><span class="pill amber">Bulan berjalan</span>Lihat data bulan ini</div></a>
                 </section>
 
+                @php
+                    $tamuHariIniShare = $totalTamu > 0 ? min(100, (int) round(($tamuHariIni / $totalTamu) * 100)) : 0;
+                    $tamuBulanIniShare = $totalTamu > 0 ? min(100, (int) round(($tamuBulanIni / $totalTamu) * 100)) : 0;
+                @endphp
+
                 <section class="main-grid">
                     <article class="panel"><div class="panel-head"><div class="panel-title"><h2>Daftar Tamu Terbaru</h2><p>Lima kunjungan terakhir</p></div></div>@if($tamuTerbaru->isEmpty())<div class="empty"><div><div class="empty-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 4.75A2.75 2.75 0 0 1 8.75 2H20v17H8.75A2.75 2.75 0 0 0 6 21.75v-17Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18.5A2.5 2.5 0 0 0 8.5 21H20M10 7h6m-6 4h6"/></svg></div><h3>Belum ada data tamu</h3><p>Data kunjungan tamu akan muncul di sini.</p></div></div>@else<div class="recent-list">@foreach($tamuTerbaru as $tamu)<article class="recent-item"><div class="recent-avatar">{{ strtoupper(substr($tamu->nama, 0, 1)) }}</div><div class="recent-body"><strong>{{ $tamu->nama }}</strong><small>{{ $tamu->instansi }} &middot; {{ $tamu->tujuan }}</small></div><div class="recent-meta"><span class="pill gray">{{ \Carbon\Carbon::parse($tamu->hari_tanggal)->locale('id')->translatedFormat('d M Y') }}</span><span class="recent-time">{{ $tamu->jam }}</span></div></article>@endforeach</div>@endif</article>
-                    <article class="panel"><div class="panel-head"><div class="panel-title"><h2>Ringkasan Data Tamu</h2><p>Statistik kunjungan</p></div></div><div class="empty"><div><div class="empty-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4 4L19 6"/></svg></div><h3>{{ $tamuHariIni }} kunjungan hari ini</h3><p>Total {{ $totalTamu }} data kunjungan tersimpan di sistem.</p></div></div></article>
+                    <article class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title">
+                                <h2>Matriks Data Tamu</h2>
+                                <p>Distribusi periode dari seluruh kunjungan</p>
+                            </div>
+                        </div>
+                        <div class="visitor-matrix">
+                            <div class="visitor-matrix__total">
+                                <div>
+                                    <span class="visitor-matrix__eyebrow">Total Keseluruhan</span>
+                                    <strong class="visitor-matrix__number">{{ $totalTamu }}</strong>
+                                    <span class="visitor-matrix__caption">kunjungan tercatat di sistem</span>
+                                </div>
+                                <span class="visitor-matrix__emblem" aria-hidden="true">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 4.75A2.75 2.75 0 0 1 8.75 2H20v17H8.75A2.75 2.75 0 0 0 6 21.75v-17Z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18.5A2.5 2.5 0 0 0 8.5 21H20M10 7h6m-6 4h6"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="visitor-matrix__grid">
+                                <div class="visitor-matrix__cell">
+                                    <span class="visitor-matrix__cell-label">Hari ini</span>
+                                    <div class="visitor-matrix__cell-value">
+                                        <strong>{{ $tamuHariIni }}</strong>
+                                        <small>{{ $tamuHariIniShare }}%</small>
+                                    </div>
+                                    <div class="visitor-matrix__track" role="progressbar" aria-label="Persentase kunjungan hari ini dari seluruh data" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ $tamuHariIniShare }}">
+                                        <span style="width: {{ $tamuHariIniShare }}%"></span>
+                                    </div>
+                                </div>
+                                <div class="visitor-matrix__cell">
+                                    <span class="visitor-matrix__cell-label">Bulan ini</span>
+                                    <div class="visitor-matrix__cell-value">
+                                        <strong>{{ $tamuBulanIni }}</strong>
+                                        <small>{{ $tamuBulanIniShare }}%</small>
+                                    </div>
+                                    <div class="visitor-matrix__track" role="progressbar" aria-label="Persentase kunjungan bulan ini dari seluruh data" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ $tamuBulanIniShare }}">
+                                        <span style="width: {{ $tamuBulanIniShare }}%"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </section>
 
                 <section class="quick-panel"><div class="panel-title"><h2>Akses Cepat</h2><p>Fitur yang sering digunakan administrator</p></div><div class="quick-grid"><a class="quick-item" href="{{ route('admin.tamu.index', ['filter' => 'all']) }}"><span class="quick-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 4.75A2.75 2.75 0 0 1 8.75 2H20v17H8.75A2.75 2.75 0 0 0 6 21.75v-17Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18.5A2.5 2.5 0 0 0 8.5 21H20M10 7h6m-6 4h6"/></svg></span><strong>Data Tamu</strong><small>Kelola seluruh data kunjungan</small></a><a class="quick-item" href="{{ route('admin.laporan.index') }}"><span class="quick-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v12m0 0 5-5m-5 5-5-5M5 16v4h14v-4"/></svg></span><strong>Export Data</strong><small>Download laporan Excel</small></a><a class="quick-item" href="{{ route('admin.pengaturan.index') }}"><span class="quick-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm7.4 6.5.1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></span><strong>Pengaturan</strong><small>Data administrator dan kata sandi</small></a></div></section>
@@ -273,11 +351,12 @@
     </div>
     <script>
         const dashboardClock = document.getElementById('dashboardClock');
+        const dashboardDate = document.getElementById('dashboardDate');
         const jayapuraWeekdays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         const jayapuraMonths = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
         function updateDashboardClock() {
-            if (!dashboardClock) {
+            if (!dashboardClock || !dashboardDate) {
                 return;
             }
 
@@ -294,7 +373,8 @@
                 + pad(jayapuraTime.getUTCMinutes()) + ':'
                 + pad(jayapuraTime.getUTCSeconds());
 
-            dashboardClock.textContent = date + ' · ' + time + ' WIT';
+            dashboardDate.textContent = date;
+            dashboardClock.textContent = time;
             dashboardClock.dateTime = now.toISOString();
         }
 
