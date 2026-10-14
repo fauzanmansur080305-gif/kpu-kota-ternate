@@ -1992,12 +1992,12 @@
                     <div class="welcome-marquee__window">
                         <span class="welcome-marquee__track">Selamat datang di layanan digital Komisi Pemilihan Umum Kota Ternate &nbsp;•&nbsp; Melayani dengan profesional, transparan, dan berintegritas</span>
                     </div>
-                    <img class="welcome-marquee__mascot" src="{{ asset('boneka-kpu.png') }}" alt="Maskot KPU Kota Ternate">
+                    <img class="welcome-marquee__mascot" src="{{ asset('boneka-kpu.png') }}?v=20261014" alt="Maskot KPU Kota Ternate">
                 </div>
                 <h1>Buku Tamu Digital</h1>
             @else
             <div class="hero-title">
-                <img class="hero-mascot" src="{{ asset('boneka-kpu.png') }}" alt="Boneka maskot KPU Kota Ternate">
+                <img class="hero-mascot" src="{{ asset('boneka-kpu.png') }}?v=20261014" alt="Boneka maskot KPU Kota Ternate">
                 <h1>Buku Tamu Digital</h1>
             </div>
             @endif
