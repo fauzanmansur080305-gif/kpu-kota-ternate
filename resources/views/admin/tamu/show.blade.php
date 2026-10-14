@@ -16,6 +16,7 @@
         .card { padding: 26px; border: 1px solid #e3eaf1; border-radius: 18px; background: white; box-shadow: 0 10px 30px rgba(25,45,75,.07); }
         .profile { display: flex; align-items: center; gap: 15px; padding-bottom: 22px; border-bottom: 1px solid #edf1f5; }
         .avatar { display: grid; width: 54px; height: 54px; place-items: center; border-radius: 15px; color: #b00821; background: #fff0f2; font-size: 22px; font-weight: 900; }
+        .avatar svg { width: 25px; height: 25px; }
         .profile h2 { margin: 0; font-size: 19px; }
         .profile p { margin: 5px 0 0; color: #8290a3; font-size: 12px; }
         .details { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding-top: 22px; }
@@ -30,7 +31,7 @@
     <main class="page">
         <div class="top"><div><div class="eyebrow">Buku Tamu</div><h1>Detail Kunjungan</h1></div><a class="back" href="{{ route('admin.tamu.index') }}">Kembali ke Data Tamu</a></div>
         <section class="card">
-            <div class="profile"><div class="avatar">♙</div><div><h2>{{ $tamu->nama }}</h2><p>{{ $tamu->instansi }} &middot; {{ $tamu->tujuan }}</p></div></div>
+            <div class="profile"><div class="avatar" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 21a8 8 0 0 1 16 0"/></svg></div><div><h2>{{ $tamu->nama }}</h2><p>{{ $tamu->instansi }} &middot; {{ $tamu->tujuan }}</p></div></div>
             <div class="details">
                 <div class="detail"><small>Tanggal</small><strong>{{ \Carbon\Carbon::parse($tamu->hari_tanggal)->locale('id')->translatedFormat('l, d F Y') }}</strong></div>
                 <div class="detail"><small>Jam</small><strong>{{ $tamu->jam }} WIT</strong></div>

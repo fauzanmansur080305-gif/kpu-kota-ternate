@@ -82,6 +82,11 @@
         background: rgba(255, 255, 255, .1);
         font-size: 16px;
     }
+    .admin-shell-nav-icon svg {
+        display: block;
+        width: 18px;
+        height: 18px;
+    }
     .admin-shell-system-label { margin-top: 25px; }
     .admin-shell-footer { padding: 15px 10px 0; border-top: 1px solid rgba(255, 255, 255, .13); }
     .admin-shell-logout {
@@ -99,6 +104,11 @@
         font-weight: 800;
         cursor: pointer;
         transition: background .2s ease, border-color .2s ease;
+    }
+    .admin-shell-logout svg {
+        display: block;
+        width: 17px;
+        height: 17px;
     }
     .admin-shell-logout:hover { border-color: #b8860b; color: #fff; background: #8a6512; }
     .admin-shell-overlay { display: none; }
@@ -167,6 +177,7 @@
         font-size: 19px;
         cursor: pointer;
     }
+    .admin-shell-toggle svg { display: block; width: 20px; height: 20px; }
     .admin-success-notice {
         position: relative;
         display: flex;
@@ -197,6 +208,7 @@
         background: #219363;
         font-size: 14px;
     }
+    .admin-success-notice__icon svg { display: block; width: 16px; height: 16px; }
     .admin-success-notice__dismiss {
         position: absolute;
         top: 50%;
@@ -214,6 +226,7 @@
         transform: translateY(-50%);
     }
     .admin-success-notice__dismiss:hover { background: rgba(33, 147, 99, .1); }
+    .admin-success-notice__dismiss svg { display: block; width: 15px; height: 15px; }
     @media (max-width: 1100px) {
         .admin-shell-sidebar { transform: translateX(-102%); }
         .admin-shell-sidebar.is-open { transform: translateX(0); }
@@ -252,17 +265,17 @@
     <nav class="admin-shell-nav" aria-label="Menu utama">
         <p class="admin-shell-menu-label">Menu Utama</p>
         <a class="admin-shell-link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}" href="{{ route('admin.dashboard') }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif>
-            <span class="admin-shell-nav-icon" aria-hidden="true">⌂</span><span>Dashboard</span>
+            <span class="admin-shell-nav-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m3 10 9-7 9 7M5 9v11h14V9M9 20v-6h6v6"/></svg></span><span>Dashboard</span>
         </a>
         <a class="admin-shell-link {{ request()->routeIs('admin.tamu.*') ? 'is-active' : '' }}" href="{{ route('admin.tamu.index') }}" @if(request()->routeIs('admin.tamu.*')) aria-current="page" @endif>
-            <span class="admin-shell-nav-icon" aria-hidden="true">♟</span><span>Data Tamu</span>
+            <span class="admin-shell-nav-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 4.75A2.75 2.75 0 0 1 8.75 2H20v17H8.75A2.75 2.75 0 0 0 6 21.75v-17Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18.5A2.5 2.5 0 0 0 8.5 21H20M10 7h6m-6 4h6"/></svg></span><span>Data Tamu</span>
         </a>
         <a class="admin-shell-link {{ request()->routeIs('admin.laporan.*') ? 'is-active' : '' }}" href="{{ route('admin.laporan.index') }}" @if(request()->routeIs('admin.laporan.*')) aria-current="page" @endif>
-            <span class="admin-shell-nav-icon" aria-hidden="true">▤</span><span>Laporan</span>
+            <span class="admin-shell-nav-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 3v5h5M8 12h8M8 16h8"/></svg></span><span>Laporan</span>
         </a>
         <p class="admin-shell-menu-label admin-shell-system-label">Sistem</p>
         <a class="admin-shell-link {{ request()->routeIs('admin.pengaturan.*') ? 'is-active' : '' }}" href="{{ route('admin.pengaturan.index') }}" @if(request()->routeIs('admin.pengaturan.*')) aria-current="page" @endif>
-            <span class="admin-shell-nav-icon" aria-hidden="true">⚙</span><span>Pengaturan</span>
+            <span class="admin-shell-nav-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/></svg></span><span>Pengaturan</span>
         </a>
     </nav>
 
@@ -270,7 +283,7 @@
         <form class="js-logout-form" action="{{ route('logout') }}" method="POST">
             @csrf
             <button class="admin-shell-logout" type="submit" title="Keluar dari sistem">
-                <span aria-hidden="true">⇥</span><span>Logout</span>
+                <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3m-5-4h12m0 0-4-4m4 4-4 4"/></svg><span>Logout</span>
             </button>
         </form>
     </div>

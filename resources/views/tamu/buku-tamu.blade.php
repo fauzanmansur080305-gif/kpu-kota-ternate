@@ -33,6 +33,7 @@
             font-weight: 800;
             font-size: 18px;
         }
+        .success-icon svg { width: 20px; height: 20px; }
 
         .success-alert strong {
             display: block;
@@ -49,7 +50,7 @@
             position: fixed;
             top: 24px;
             right: 24px;
-            z-index: 40;
+            z-index: 60;
             display: flex;
             align-items: flex-start;
             gap: 12px;
@@ -97,6 +98,7 @@
 
         .visit-feedback--success .visit-feedback__icon { color: #16a34a; }
         .visit-feedback--error .visit-feedback__icon { color: #dc2626; }
+        .visit-feedback__icon svg { width: 16px; height: 16px; stroke: white; }
 
         .visit-feedback strong {
             display: block;
@@ -520,6 +522,12 @@
             width: 22px;
             text-align: center;
             font-size: 17px;
+        }
+        .menu-icon svg {
+            display: block;
+            width: 18px;
+            height: 18px;
+            margin: 0 auto;
         }
 
         .sidebar-bottom {
@@ -1006,6 +1014,7 @@
             border: 1px solid rgba(255,255,255,.15);
             font-size: 11px;
         }
+        .hero-badge svg { width: 13px; height: 13px; margin-right: 5px; }
 
         /* ================= CONTENT ================= */
 
@@ -1193,6 +1202,11 @@
             transform: translateY(-50%);
             color: #8494a9;
             font-size: 14px;
+        }
+        .input-icon svg {
+            display: block;
+            width: 15px;
+            height: 15px;
         }
 
         .input-wrap input,
@@ -1476,6 +1490,12 @@
             color: #315c85;
             flex-shrink: 0;
         }
+        .info-icon svg,
+        .info-title svg {
+            display: block;
+            width: 18px;
+            height: 18px;
+        }
 
         .info-row strong {
             display: block;
@@ -1607,6 +1627,7 @@
             align-items: center;
             color: #315c85;
         }
+        .value-icon svg { width: 18px; height: 18px; }
 
         /* ================= RESPONSIVE ================= */
 
@@ -1630,6 +1651,10 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
+            }
+            .header-icon svg {
+                width: 23px;
+                height: 23px;
             }
 
             .sidebar-overlay {
@@ -1828,22 +1853,30 @@
         <div class="menu-title">Menu Utama</div>
 
         <a href="{{ route('home') }}" class="menu-item{{ $isBeranda ? ' active' : '' }}" data-nav="beranda">
-            <span class="menu-icon">⌂</span>
+            <span class="menu-icon" aria-hidden="true">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m3 10 9-7 9 7M5 9v11h14V9M9 20v-6h6v6"/></svg>
+            </span>
             <span>Beranda</span>
         </a>
 
         <a href="{{ route('tamu.index') }}" class="menu-item{{ !$isBeranda ? ' active' : '' }}" data-nav="buku-tamu">
-            <span class="menu-icon">♟</span>
+            <span class="menu-icon" aria-hidden="true">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 4.75A2.75 2.75 0 0 1 8.75 2H20v17H8.75A2.75 2.75 0 0 0 6 21.75v-17Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18.5A2.5 2.5 0 0 0 8.5 21H20M10 7h6m-6 4h6"/></svg>
+            </span>
             <span>Buku Tamu</span>
         </a>
 
         <a href="{{ route('home') }}#kontak-kpu" class="menu-item" data-nav="kontak">
-            <span class="menu-icon">☎</span>
+            <span class="menu-icon" aria-hidden="true">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.5A17.85 17.85 0 0 1 3 5.14 1.5 1.5 0 0 1 4.5 3.5h3a1.5 1.5 0 0 1 1.5 1.29l.45 3.15a1.5 1.5 0 0 1-.43 1.28l-1.3 1.3a14.4 14.4 0 0 0 5.76 5.76l1.3-1.3a1.5 1.5 0 0 1 1.28-.43l3.15.45A1.5 1.5 0 0 1 21 16.5Z"/></svg>
+            </span>
             <span>Kontak</span>
         </a>
 
         <a href="{{ route('login') }}" class="menu-item" id="openLogin">
-            <span class="menu-icon">⇥</span>
+            <span class="menu-icon" aria-hidden="true">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3m-5-4h12m0 0-4-4m4 4-4 4"/></svg>
+            </span>
             <span>Login</span>
         </a>
 
@@ -1867,7 +1900,7 @@
         <header class="topbar topbar-sticky">
 
             <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false">
-                ☰
+                <svg aria-hidden="true" width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
 
             <div class="top-brand">
@@ -1934,7 +1967,8 @@
                 </p>
 
                 <div class="hero-badge">
-                    ✦ KPU Kota Ternate
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3Z"/></svg>
+                    KPU Kota Ternate
                 </div>
             @else
                 <p>
@@ -1943,7 +1977,8 @@
                 </p>
 
                 <div class="hero-badge">
-                    ✦ Pelayanan Tamu Digital
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3Z"/></svg>
+                    Pelayanan Tamu Digital
                 </div>
 
                 <div class="month-count">
@@ -1961,7 +1996,7 @@
     <div class="success-alert">
 
         <div class="success-icon">
-            ✓
+            <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="m5 12 4 4L19 6"/></svg>
         </div>
 
         <div>
@@ -1982,12 +2017,12 @@
                     <div id="kontak-kpu" class="card info-card">
 
                         <div class="info-title">
-                            <span>☎</span>
+                            <span aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.5A17.85 17.85 0 0 1 3 5.14 1.5 1.5 0 0 1 4.5 3.5h3a1.5 1.5 0 0 1 1.5 1.29l.45 3.15a1.5 1.5 0 0 1-.43 1.28l-1.3 1.3a14.4 14.4 0 0 0 5.76 5.76l1.3-1.3a1.5 1.5 0 0 1 1.28-.43l3.15.45A1.5 1.5 0 0 1 21 16.5Z"/></svg></span>
                             Kontak KPU Kota Ternate
                         </div>
 
                         <div class="info-row">
-                            <div class="info-icon">●</div>
+                            <div class="info-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5" stroke-width="1.8"/></svg></div>
                             <div>
                                 <strong>Alamat</strong>
                                 <span>
@@ -1998,7 +2033,7 @@
                         </div>
 
                         <div class="info-row">
-                            <div class="info-icon">◷</div>
+                            <div class="info-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 7v5l3 2"/></svg></div>
                             <div>
                                 <strong>Jam Pelayanan</strong>
                                 <span>
@@ -2009,7 +2044,7 @@
                         </div>
 
                         <div class="info-row">
-                            <div class="info-icon">☎</div>
+                            <div class="info-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.5A17.85 17.85 0 0 1 3 5.14 1.5 1.5 0 0 1 4.5 3.5h3a1.5 1.5 0 0 1 1.5 1.29l.45 3.15a1.5 1.5 0 0 1-.43 1.28l-1.3 1.3a14.4 14.4 0 0 0 5.76 5.76l1.3-1.3a1.5 1.5 0 0 1 1.28-.43l3.15.45A1.5 1.5 0 0 1 21 16.5Z"/></svg></div>
                             <div>
                                 <strong>Informasi</strong>
                                 <span>
@@ -2093,7 +2128,7 @@
                     <div class="card-header">
 
                         <div class="header-icon">
-                            ♙
+                            <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 21a8 8 0 0 1 16 0"/></svg>
                         </div>
 
                         <div>
@@ -2123,7 +2158,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">▣</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M16 3v4M8 3v4M3 10h18"/></svg></span>
 
                                     <input
                                         type="text"
@@ -2147,7 +2182,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">◷</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 7v5l3 2"/></svg></span>
 
                                     <input
                                         type="text"
@@ -2171,7 +2206,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">♙</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 21a8 8 0 0 1 16 0"/></svg></span>
 
                                     <input
                                         type="text"
@@ -2195,7 +2230,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">▦</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h.01M15 9h.01M9 12h.01M15 12h.01"/></svg></span>
 
                                     <input
                                         type="text"
@@ -2219,7 +2254,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">●</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5" stroke-width="1.8"/></svg></span>
 
                                     <textarea
                                         name="alamat"
@@ -2242,7 +2277,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">▤</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 3v5h5M8 12h8M8 16h8"/></svg></span>
 
                                     <textarea
                                         name="keperluan"
@@ -2265,7 +2300,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">◎</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke-width="1.8"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></span>
 
                                     <select id="visitPurpose" name="tujuan" required>
 
@@ -2304,7 +2339,7 @@
                                     </select>
 
                                     <div class="input-wrap" id="otherPurposeWrap" hidden>
-                                        <span class="input-icon">✎</span>
+                                        <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m16 4 4 4M4 20l4-.8L19 8a2.8 2.8 0 0 0-4-4L4 15l-.8 5Z"/></svg></span>
                                         <input
                                             type="text"
                                             id="otherPurpose"
@@ -2330,7 +2365,7 @@
 
                                 <div class="input-wrap">
 
-                                    <span class="input-icon">☎</span>
+                                    <span class="input-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 16.5v3a1.5 1.5 0 0 1-1.64 1.5A17.85 17.85 0 0 1 3 5.14 1.5 1.5 0 0 1 4.5 3.5h3a1.5 1.5 0 0 1 1.5 1.29l.45 3.15a1.5 1.5 0 0 1-.43 1.28l-1.3 1.3a14.4 14.4 0 0 0 5.76 5.76l1.3-1.3a1.5 1.5 0 0 1 1.28-.43l3.15.45A1.5 1.5 0 0 1 21 16.5Z"/></svg></span>
 
                                     <input
                                         type="tel"
@@ -2381,6 +2416,10 @@
                                         <video id="guestCameraPreview" autoplay playsinline></video>
                                         <canvas id="guestCameraCanvas" hidden></canvas>
                                         <div class="guest-photo-actions">
+                                            <button class="guest-photo-button guest-photo-button--secondary" id="switchGuestCamera" type="button" aria-label="Ganti ke kamera depan">
+                                                <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:5px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7v5h-5M4 17v-5h5"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.5 9A7.5 7.5 0 0 1 18 6l2 2M4 16l2 2a7.5 7.5 0 0 0 12.5-3"/></svg>
+                                                Balik Kamera
+                                            </button>
                                             <button class="guest-photo-button" id="captureGuestPhoto" type="button">Ambil Foto</button>
                                             <button class="guest-photo-button guest-photo-button--secondary" id="closeGuestCamera" type="button">Batal</button>
                                         </div>
@@ -2409,7 +2448,8 @@
                                     <div class="signature-footer">
 
                                         <span>
-                                            ✎ Buat paraf menggunakan mouse atau layar sentuh
+                                            <svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:4px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m16 4 4 4M4 20l4-.8L19 8a2.8 2.8 0 0 0-4-4L4 15l-.8 5Z"/></svg>
+                                            Buat paraf menggunakan mouse atau layar sentuh
                                         </span>
 
                                         <button
@@ -2436,7 +2476,8 @@
 
 
                         <button type="submit" class="submit-btn">
-                            ✈ &nbsp; Simpan Kunjungan
+                            <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:5px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg>
+                            Simpan Kunjungan
                         </button>
 
                     </form>
@@ -2463,7 +2504,7 @@
                             <div class="value">
 
                                 <div class="value-icon">
-                                    ✓
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4 4L19 6"/></svg>
                                 </div>
 
                                 Profesional
@@ -2473,7 +2514,7 @@
                             <div class="value">
 
                                 <div class="value-icon">
-                                    ◈
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3 21 12l-9 9-9-9 9-9Z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m12 8 4 4-4 4-4-4 4-4Z"/></svg>
                                 </div>
 
                                 Transparan
@@ -2483,7 +2524,7 @@
                             <div class="value">
 
                                 <div class="value-icon">
-                                    ✓
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12 4 4L19 6"/></svg>
                                 </div>
 
                                 Akuntabel
@@ -2567,7 +2608,7 @@
 
 <div class="visit-confirm" id="visitConfirm" role="dialog" aria-modal="true" aria-labelledby="visitConfirmTitle" aria-hidden="true">
     <div class="visit-confirm__card">
-        <div class="visit-confirm__icon" aria-hidden="true">✈</div>
+        <div class="visit-confirm__icon" aria-hidden="true"><svg width="27" height="27" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></div>
         <h2 id="visitConfirmTitle">Simpan kunjungan?</h2>
         <p>Pastikan data kunjungan yang Anda isi sudah benar sebelum melanjutkan.</p>
         <div class="visit-confirm__actions">
@@ -2638,6 +2679,7 @@
     let feedbackTimer;
     let confirmedSubmit = false;
     let guestCameraStream;
+    let guestCameraFacingMode = 'environment';
 
     function setGuestPhoto(file) {
         if (!file) {
@@ -2662,6 +2704,27 @@
         guestCameraDialog.hidden = true;
     }
 
+    async function switchGuestCamera(facingMode) {
+        const nextStream = await navigator.mediaDevices.getUserMedia({
+            audio: false,
+            video: { facingMode: { ideal: facingMode } }
+        });
+
+        if (guestCameraStream) {
+            guestCameraStream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+        }
+
+        guestCameraStream = nextStream;
+        guestCameraFacingMode = facingMode;
+        guestCameraPreview.srcObject = nextStream;
+        document.getElementById('switchGuestCamera').setAttribute(
+            'aria-label',
+            facingMode === 'environment' ? 'Ganti ke kamera depan' : 'Ganti ke kamera belakang'
+        );
+    }
+
     if (guestPhoto && guestCameraPhoto && guestPhotoSelection && guestCameraDialog && guestCameraPreview && guestCameraCanvas) {
         document.getElementById('chooseGuestPhoto').addEventListener('click', function () {
             guestPhoto.click();
@@ -2674,11 +2737,7 @@
             }
 
             try {
-                guestCameraStream = await navigator.mediaDevices.getUserMedia({
-                    audio: false,
-                    video: { facingMode: { ideal: 'environment' } }
-                });
-                guestCameraPreview.srcObject = guestCameraStream;
+                await switchGuestCamera('environment');
                 guestCameraDialog.hidden = false;
                 document.getElementById('captureGuestPhoto').focus();
             } catch (error) {
@@ -2686,6 +2745,16 @@
                     ? 'Kamera tidak dapat dibuka. Izinkan akses kamera pada browser atau gunakan tombol Pilih File.'
                     : 'Akses kamera membutuhkan HTTPS atau localhost. Buka aplikasi melalui koneksi aman atau gunakan tombol Pilih File.';
                 showVisitFeedback('error', 'Kamera tidak tersedia', message);
+            }
+        });
+
+        document.getElementById('switchGuestCamera').addEventListener('click', async function () {
+            const nextFacingMode = guestCameraFacingMode === 'environment' ? 'user' : 'environment';
+
+            try {
+                await switchGuestCamera(nextFacingMode);
+            } catch (error) {
+                showVisitFeedback('error', 'Kamera tidak dapat diganti', 'Perangkat tidak dapat menggunakan kamera tersebut. Silakan coba kembali.');
             }
         });
 
@@ -2777,7 +2846,9 @@
     function showVisitFeedback(type, title, message) {
         clearTimeout(feedbackTimer);
         visitFeedback.className = 'visit-feedback visit-feedback--' + type + ' is-visible';
-        visitFeedbackIcon.textContent = type === 'success' ? '✓' : '!';
+        visitFeedbackIcon.innerHTML = type === 'success'
+            ? '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="m5 12 4 4L19 6"/></svg>'
+            : '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 8v5m0 4h.01M10.3 3.9 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3l-7.5-13.1a2 2 0 0 0-3.4 0Z"/></svg>';
         visitFeedbackTitle.textContent = title;
         visitFeedbackMessage.textContent = message;
         visitFeedback.setAttribute('aria-hidden', 'false');

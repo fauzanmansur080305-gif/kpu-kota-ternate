@@ -33,6 +33,7 @@
         .summary-label { color:var(--muted); font-size:11px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; } .summary-value { margin-top:9px; font-size:30px; font-weight:900; }
         .report-grid { display:grid; grid-template-columns:1fr; gap:18px; } .report-card { padding:24px; border:1px solid var(--line); border-radius:17px; background:white; box-shadow:0 10px 28px rgba(25,45,75,.06); } .report-card h2 { margin:0; font-size:17px; } .report-card p { min-height:45px; margin:8px 0 22px; color:var(--muted); font-size:12px; line-height:1.6; }
         .export { display:inline-flex; align-items:center; gap:9px; padding:12px 15px; border:0; border-radius:10px; color:white; background:linear-gradient(135deg,var(--red),#8a6308); font-size:12px; font-weight:800; cursor:pointer; box-shadow:0 8px 18px rgba(184,134,11,.18); }
+        .export svg { width:16px; height:16px; }
         .export-form { display:grid; max-width:480px; gap:14px; margin-top:22px; }
         .export-field { display:grid; gap:7px; color:#52637a; font-size:11px; font-weight:800; }
         .export-field select,.export-field input { width:100%; min-height:45px; padding:10px 12px; border:1px solid #dbe3ec; border-radius:11px; outline:0; color:var(--ink); background:#fbfcfe; font:inherit; transition:border-color .2s,box-shadow .2s,background .2s; }
@@ -44,11 +45,13 @@
         .export-confirmation.is-open .export-dialog { transform:translateY(0) scale(1); }
         .export-dialog__heading { position:relative; display:flex; align-items:center; gap:14px; }
         .export-dialog__icon { display:grid; width:50px; height:50px; flex:0 0 50px; place-items:center; border:1px solid rgba(184,134,11,.22); border-radius:16px; color:#76520c; background:linear-gradient(145deg,#fffdf5,#f8eccb); box-shadow:0 9px 20px rgba(138,101,18,.1); font-size:22px; }
+        .export-dialog__icon svg { width:23px; height:23px; }
         .export-dialog__eyebrow { display:block; margin-bottom:5px; color:#8a6512; font-size:9px; font-weight:900; letter-spacing:1.5px; text-transform:uppercase; }
         .export-dialog h2 { position:relative; margin:0; color:#3b1608; font-size:20px; letter-spacing:-.3px; }
         .export-dialog p { position:relative; margin:16px 0 0; color:var(--muted); font-size:12px; line-height:1.65; }
         .export-period-hint { display:flex; align-items:flex-start; gap:9px; padding:11px 12px; border:1px solid #e8edf3; border-radius:11px; color:#718096; background:#f8fafc; font-size:10px; line-height:1.5; }
-        .export-period-hint span:first-child { color:#8a6512; font-size:13px; }
+        .export-period-hint span:first-child { display:block; flex:0 0 auto; color:#8a6512; font-size:13px; }
+        .export-period-hint svg { width:14px; height:14px; }
         .note { margin-top:18px; padding:14px 16px; border-radius:12px; color:#65768a; background:#f7f9fb; font-size:11px; line-height:1.6; }
         .export-confirmation { position:fixed; inset:0; z-index:90; display:grid; place-items:center; padding:20px; background:rgba(20,8,2,.52); backdrop-filter:blur(8px); opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; }
         .export-confirmation.is-open { opacity:1; visibility:visible; pointer-events:auto; }
@@ -79,7 +82,7 @@
             <p class="lead">Unduh data tamu dalam format Excel dengan tabel rapi, paraf, dan gambar dokumentasi.</p>
             <div class="summary"><div class="summary-card"><div class="summary-label">Total Tamu</div><div class="summary-value">{{ $totalTamu }}</div></div><div class="summary-card"><div class="summary-label">Tamu Hari Ini</div><div class="summary-value">{{ $totalTamuHariIni }}</div></div></div>
             <div class="report-grid">
-                <article class="report-card"><h2>Data Tamu</h2><p>Pilih satu bulan tertentu atau ekspor seluruh data kunjungan tamu yang tersimpan di database KPU Kota Ternate.</p><button class="export" id="openExportConfirmation" type="button">↓ &nbsp; Ekspor Data Tamu</button></article>
+                <article class="report-card"><h2>Data Tamu</h2><p>Pilih satu bulan tertentu atau ekspor seluruh data kunjungan tamu yang tersimpan di database KPU Kota Ternate.</p><button class="export" id="openExportConfirmation" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v12m0 0 5-5m-5 5-5-5M5 16v4h14v-4"/></svg>Ekspor Data Tamu</button></article>
             </div>
             <div class="note">Data tamu yang diekspor berisi tanggal, jam, nama, instansi, alamat, keperluan, tujuan, nomor handphone, paraf, dan gambar dokumentasi.</div>
         </section>
@@ -87,7 +90,7 @@
     <div class="export-confirmation" id="exportConfirmation" role="alertdialog" aria-modal="true" aria-labelledby="exportConfirmationTitle" aria-hidden="true">
         <section class="export-dialog">
             <div class="export-dialog__heading">
-                <span class="export-dialog__icon" aria-hidden="true">⇩</span>
+                <span class="export-dialog__icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v12m0 0 5-5m-5 5-5-5M5 16v4h14v-4"/></svg></span>
                 <div><span class="export-dialog__eyebrow">Unduh Laporan Excel</span><h2 id="exportConfirmationTitle">Ekspor data tamu</h2></div>
             </div>
             <p>File Excel akan menyertakan data tamu, paraf, dan gambar dokumentasi sesuai periode yang dipilih.</p>
@@ -104,10 +107,10 @@
                 <label class="export-field" id="exportMonthField" for="exportMonth" hidden>Pilih bulan
                     <input id="exportMonth" name="bulan" type="month" value="{{ old('bulan') }}">
                 </label>
-                <div class="export-period-hint"><span aria-hidden="true">ⓘ</span><span>Foto dan paraf akan disisipkan ke dalam file Excel. Proses unduhan akan dimulai setelah Anda memilih ekspor.</span></div>
+                <div class="export-period-hint"><span aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 11v5m0-8h.01"/></svg></span><span>Foto dan paraf akan disisipkan ke dalam file Excel. Proses unduhan akan dimulai setelah Anda memilih ekspor.</span></div>
                 <div class="export-actions">
                     <button class="export-cancel" id="cancelExport" type="button">Batal</button>
-                    <button class="export-confirm" type="submit"><span aria-hidden="true">↓</span> Ekspor Data</button>
+                    <button class="export-confirm" type="submit"><svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v12m0 0 5-5m-5 5-5-5M5 16v4h14v-4"/></svg> Ekspor Data</button>
                 </div>
             </form>
         </section>

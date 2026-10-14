@@ -660,6 +660,7 @@
             font-size: 15px;
             transition: .2s;
         }
+        .action svg { display: block; width: 17px; height: 17px; }
 
         .action a:hover,
         .action button:hover {
@@ -803,6 +804,7 @@
         .bulk-delete-header { align-items: center; padding: 24px 26px; background: linear-gradient(110deg, #fff, #fff8f2 58%, #fff2f3); }
         .bulk-delete-heading { display: flex; align-items: center; gap: 14px; }
         .bulk-delete-icon { display: grid; width: 48px; height: 48px; flex: 0 0 48px; place-items: center; border: 1px solid #f2d3d6; border-radius: 15px; color: #a20a20; background: linear-gradient(145deg, #fff, #ffecee); box-shadow: 0 8px 18px rgba(176, 8, 33, .1); font-size: 20px; }
+        .bulk-delete-icon svg { width: 21px; height: 21px; }
         .bulk-delete-heading .modal-kicker { color: #a20a20; }
         .bulk-delete-heading h2 { font-size: 21px; letter-spacing: -.35px; }
         .bulk-delete-intro { display: flex; gap: 11px; margin: 0 0 20px; padding: 13px 14px; border: 1px solid #f5e2bd; border-radius: 13px; color: #76531a; background: linear-gradient(110deg, #fffaf0, #fff); font-size: 12px; line-height: 1.6; }
@@ -1131,7 +1133,7 @@
 <div class="modal-backdrop" id="bulkDeleteModal" role="dialog" aria-modal="true" aria-labelledby="bulkDeleteModalTitle">
     <section class="modal-card bulk-delete-card">
         <header class="modal-header bulk-delete-header">
-            <div class="bulk-delete-heading"><span class="bulk-delete-icon" aria-hidden="true">⌫</span><div><div class="modal-kicker">Kelola Data Tamu</div><h2 id="bulkDeleteModalTitle">Hapus Data Tamu</h2></div></div>
+            <div class="bulk-delete-heading"><span class="bulk-delete-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6h18M8 6V4h8v2m4 0-1 14H5L4 6m5 4v6m6-6v6"/></svg></span><div><div class="modal-kicker">Kelola Data Tamu</div><h2 id="bulkDeleteModalTitle">Hapus Data Tamu</h2></div></div>
             <button class="modal-close" type="button" data-close-modal aria-label="Tutup">&times;</button>
         </header>
         <form action="{{ route('admin.tamu.destroy-matching') }}" method="POST">

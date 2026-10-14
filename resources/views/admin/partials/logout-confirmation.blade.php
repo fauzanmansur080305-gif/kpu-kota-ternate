@@ -158,7 +158,11 @@
 
 <div class="logout-confirmation" id="logoutConfirmation" role="alertdialog" aria-modal="true" aria-labelledby="logoutConfirmationTitle" aria-describedby="logoutConfirmationMessage" aria-hidden="true">
     <section class="logout-confirmation__card">
-        <div class="logout-confirmation__icon" aria-hidden="true">?</div>
+        <div class="logout-confirmation__icon" aria-hidden="true">
+            <svg width="27" height="27" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3m-5-4h12m0 0-4-4m4 4-4 4"/>
+            </svg>
+        </div>
         <h2 id="logoutConfirmationTitle">Yakin ingin <span style="color:#e0bd52;">Logout?</span></h2>
         <p id="logoutConfirmationMessage">Anda akan keluar dari dashboard administrator. Pastikan pekerjaan Anda sudah selesai.</p>
         <div class="logout-confirmation__actions">

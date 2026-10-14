@@ -55,7 +55,7 @@
                                     data-paraf="{{ $tamu->paraf ? 'Tersedia' : 'Tidak tersedia' }}"
                                     data-paraf-url="{{ $tamu->paraf && \Illuminate\Support\Str::startsWith($tamu->paraf, 'data:image/') ? route('admin.tamu.paraf', $tamu) : '' }}"
                                     data-gambar-url="{{ $tamu->documentationPath() ? route('admin.tamu.gambar', $tamu) : '' }}"
-                                >👁</button>
+                                ><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5" stroke-width="1.8"/></svg></button>
                                 <button
                                     type="button"
                                     class="btn-edit"
@@ -72,7 +72,7 @@
                                     data-keperluan="{{ $tamu->keperluan }}"
                                     data-paraf-url="{{ $tamu->paraf && \Illuminate\Support\Str::startsWith($tamu->paraf, 'data:image/') ? route('admin.tamu.paraf', $tamu) : '' }}"
                                     data-gambar-url="{{ $tamu->documentationPath() ? route('admin.tamu.gambar', $tamu) : '' }}"
-                                >✎</button>
+                                ><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m16 4 4 4M4 20l4-.8L19 8a2.8 2.8 0 0 0-4-4L4 15l-.8 5Z"/></svg></button>
                                 <button
                                     type="button"
                                     class="btn-delete"
@@ -80,7 +80,7 @@
                                     data-modal="delete"
                                     data-id="{{ $tamu->id }}"
                                     data-nama="{{ $tamu->nama }}"
-                                >🗑</button>
+                                ><svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M10 11v6m4-6v6M5 7l1 14h12l1-14M9 7V4h6v3"/></svg></button>
                             </div>
                         </td>
                     </tr>
@@ -89,7 +89,13 @@
         </table>
     @else
         <div class="empty">
-            <div class="empty-icon">{{ $search !== '' ? '⌕' : '♙' }}</div>
+            <div class="empty-icon" aria-hidden="true">
+                @if($search !== '')
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="m16 16 5 5"/></svg>
+                @else
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 21a8 8 0 0 1 16 0"/></svg>
+                @endif
+            </div>
             <strong>{{ $search !== '' ? 'Tidak ada hasil pencarian' : 'Belum ada data tamu' }}</strong>
             <p>
                 @if($search !== '')
