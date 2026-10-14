@@ -2761,15 +2761,33 @@
     }
 
     async function switchGuestCamera(facingMode) {
-        const nextStream = await navigator.mediaDevices.getUserMedia({
-            audio: false,
-            video: { facingMode: { ideal: facingMode } }
-        });
+        const previousStream = guestCameraStream;
 
-        if (guestCameraStream) {
-            guestCameraStream.getTracks().forEach(function (track) {
+        if (previousStream) {
+            guestCameraStream = null;
+            guestCameraPreview.srcObject = null;
+            previousStream.getTracks().forEach(function (track) {
                 track.stop();
             });
+        }
+
+        let nextStream;
+
+        try {
+            nextStream = await navigator.mediaDevices.getUserMedia({
+                audio: false,
+                video: { facingMode: { ideal: facingMode } }
+            });
+        } catch (error) {
+            if (previousStream) {
+                guestCameraStream = await navigator.mediaDevices.getUserMedia({
+                    audio: false,
+                    video: { facingMode: { ideal: guestCameraFacingMode } }
+                });
+                guestCameraPreview.srcObject = guestCameraStream;
+            }
+
+            throw error;
         }
 
         guestCameraStream = nextStream;
