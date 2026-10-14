@@ -240,7 +240,7 @@
         <section class="login-intro">
             <img class="logo-mark" src="{{ asset('kpu-logo.png') }}" alt="Logo KPU">
             <h1>Komisi Pemilihan Umum<br>Kota Ternate</h1>
-            <p>Sistem informasi buku tamu, absensi, dan pelayanan KPU Kota Ternate.</p>
+            <p>Sistem informasi buku tamu dan pelayanan KPU Kota Ternate.</p>
             <span class="tag">Sistem Informasi KPU</span>
         </section>
 
