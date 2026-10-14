@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
@@ -27,7 +28,9 @@ class AdminSettingsTest extends TestCase
             ->assertOk()
             ->assertSee('Admin Ternate')
             ->assertSee('admin@example.test')
-            ->assertSee('1234567890');
+            ->assertSee('1234567890')
+            ->assertSee('Reset Sistem')
+            ->assertSee('Lanjutkan');
 
         $this->post(route('admin.pengaturan.password'), [
             'current_password' => 'password',
@@ -98,6 +101,81 @@ class AdminSettingsTest extends TestCase
         $this->assertSame('9876543210', $administrator->fresh()->nip);
         $this->assertSame('updated@example.test', $administrator->fresh()->email);
         $this->assertNotSame('Nama Tidak Boleh Diubah', $administrator->fresh()->name);
+    }
+
+    public function test_administrator_can_reset_system_data_without_deleting_users_or_operational_data(): void
+    {
+        $administrator = User::factory()->create([
+            'nip' => '1234567890',
+            'role' => 'admin',
+        ]);
+        $this->authenticateAdmin($administrator);
+        User::factory()->create(['role' => 'anggota']);
+
+        DB::table('tamus')->insert([
+            'hari_tanggal' => '2026-10-14',
+            'jam' => '10:00:00',
+            'nama' => 'Tamu Uji',
+            'instansi' => 'Instansi Uji',
+            'alamat' => 'Alamat Uji',
+            'keperluan' => 'Keperluan Uji',
+            'tujuan' => 'KPU',
+            'no_handphone' => '081234567890',
+        ]);
+        DB::table('sessions')->insert([
+            'id' => 'session-to-reset',
+            'user_id' => $administrator->id,
+            'payload' => 'session data',
+            'last_activity' => now()->timestamp,
+        ]);
+        DB::table('password_reset_tokens')->insert([
+            'email' => $administrator->email,
+            'token' => 'reset-token',
+            'created_at' => now(),
+        ]);
+        DB::table('cache')->insert([
+            'key' => 'cache-to-reset',
+            'value' => 'cached data',
+            'expiration' => now()->addHour()->timestamp,
+        ]);
+        DB::table('cache_locks')->insert([
+            'key' => 'lock-to-reset',
+            'owner' => 'lock-owner',
+            'expiration' => now()->addHour()->timestamp,
+        ]);
+        DB::table('jobs')->insert([
+            'queue' => 'default',
+            'payload' => '{}',
+            'attempts' => 0,
+            'available_at' => now()->timestamp,
+            'created_at' => now()->timestamp,
+        ]);
+
+        $this->post(route('admin.pengaturan.reset-system'))
+            ->assertRedirect(route('login'))
+            ->assertSessionHas('status', 'Reset sistem berhasil. Seluruh sesi telah dihapus; silakan masuk kembali.');
+
+        $this->assertDatabaseCount('users', 2);
+        $this->assertDatabaseHas('users', [
+            'id' => $administrator->id,
+            'email' => $administrator->email,
+            'role' => 'admin',
+        ]);
+        $this->assertDatabaseCount('tamus', 0);
+        $this->assertDatabaseCount('sessions', 0);
+        $this->assertDatabaseCount('password_reset_tokens', 0);
+        $this->assertDatabaseCount('cache', 0);
+        $this->assertDatabaseCount('cache_locks', 0);
+        $this->assertDatabaseCount('jobs', 1);
+    }
+
+    public function test_non_administrators_cannot_reset_system_data(): void
+    {
+        $user = User::factory()->create(['role' => 'anggota']);
+
+        $this->actingAs($user)
+            ->post(route('admin.pengaturan.reset-system'))
+            ->assertForbidden();
     }
 
     private function authenticateAdmin(User $administrator): void

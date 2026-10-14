@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -80,5 +82,41 @@ class PengaturanController extends Controller
         return redirect()
             ->route('admin.pengaturan.index')
             ->with('profile_success', 'Data administrator berhasil diperbarui.');
+    }
+
+    public function resetSystem(Request $request): RedirectResponse
+    {
+        abort_unless($request->user()->role === 'admin', 403);
+
+        $defaultConnection = config('database.default');
+        $sessionConnection = config('session.connection') ?? $defaultConnection;
+        $cacheConnection = config('cache.stores.database.connection') ?? $defaultConnection;
+        $cacheLockConnection = config('cache.stores.database.lock_connection') ?? $cacheConnection;
+        $cacheTable = config('cache.stores.database.table', 'cache');
+        $tablesByConnection = [
+            $defaultConnection => ['tamus', 'password_reset_tokens'],
+        ];
+        $tablesByConnection[$sessionConnection][] = config('session.table', 'sessions');
+        $tablesByConnection[$cacheConnection][] = $cacheTable;
+        $tablesByConnection[$cacheLockConnection][] = config('cache.stores.database.lock_table')
+            ?? $cacheTable.'_locks';
+
+        foreach ($tablesByConnection as $connection => $tables) {
+            DB::connection($connection)->transaction(function () use ($connection, $tables): void {
+                $database = DB::connection($connection);
+
+                foreach (array_unique($tables) as $table) {
+                    $database->table($table)->delete();
+                }
+            });
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()
+            ->route('login')
+            ->with('status', 'Reset sistem berhasil. Seluruh sesi telah dihapus; silakan masuk kembali.');
     }
 }

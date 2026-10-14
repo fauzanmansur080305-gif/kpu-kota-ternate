@@ -65,6 +65,8 @@ Route::middleware(['auth', EnsureAdminSessionIsCurrent::class])->group(function 
         ->name('admin.pengaturan.profile');
     Route::post('/admin/pengaturan/kata-sandi', [PengaturanController::class, 'updatePassword'])
         ->name('admin.pengaturan.password');
+    Route::post('/admin/pengaturan/reset-sistem', [PengaturanController::class, 'resetSystem'])
+        ->name('admin.pengaturan.reset-system');
 
 });
 

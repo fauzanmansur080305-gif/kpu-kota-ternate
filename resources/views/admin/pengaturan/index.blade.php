@@ -68,6 +68,18 @@
         .field-error { display: block; margin-top: 6px; color: #b42318; font-size: 11px; }
         .submit { display: inline-flex; min-height: 43px; align-items: center; justify-content: center; gap: 8px; margin-top: 3px; padding: 0 16px; border: 0; border-radius: 11px; color: white; background: linear-gradient(135deg, var(--brown), var(--gold-deep)); box-shadow: 0 8px 18px rgba(74,30,14,.16); font-size: 12px; font-weight: 800; cursor: pointer; }
         .submit:hover { filter: brightness(1.08); }
+        .reset-card { margin-top: 18px; }
+        .reset-button { display: inline-flex; min-height: 43px; align-items: center; justify-content: center; padding: 0 16px; border: 0; border-radius: 11px; color: white; background: #b42318; box-shadow: 0 8px 18px rgba(180,35,24,.16); font-size: 12px; font-weight: 800; cursor: pointer; }
+        .reset-button:hover { background: #912018; }
+        .reset-dialog { width: min(460px, calc(100% - 32px)); padding: 25px; border: 1px solid var(--line); border-radius: 18px; color: var(--ink); box-shadow: 0 24px 70px rgba(25,45,75,.24); }
+        .reset-dialog::backdrop { background: rgba(23,43,77,.55); backdrop-filter: blur(4px); }
+        .reset-dialog h2 { margin: 0 0 10px; font-size: 18px; }
+        .reset-dialog p { margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+        .reset-dialog__actions { display: flex; justify-content: flex-end; gap: 9px; }
+        .reset-dialog__actions button { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+        .reset-dialog__cancel { color: var(--ink); background: white; }
+        .reset-dialog__confirm { border-color: transparent !important; color: white; background: #b42318; }
+        .reset-dialog__confirm:hover { background: #912018; }
         @media(max-width: 900px) { .sidebar { display: none; } .main { margin-left: 0; } .topbar { padding: 13px 18px; } .content { padding: 27px 18px; } }
         @media(max-width: 680px) { .settings-grid { grid-template-columns: 1fr; } .content { padding: 23px 15px; } }
     </style>
@@ -146,8 +158,41 @@
                     </div>
                 </article>
             </div>
+
+            <article class="card reset-card">
+                <header class="card-head"><h2>Reset Sistem</h2><p>Menghapus data tamu, sesi, token reset kata sandi, cache, dan cache lock. Data akun pengguna serta antrean dan riwayat migration tetap tersimpan.</p></header>
+                <div class="card-body">
+                    <button class="reset-button" id="openResetSystemDialog" type="button">Reset Sistem</button>
+                    <form id="resetSystemForm" action="{{ route('admin.pengaturan.reset-system') }}" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            </article>
         </section>
     </main>
+
+    <dialog class="reset-dialog" id="resetSystemDialog" aria-labelledby="resetSystemDialogTitle" aria-describedby="resetSystemDialogMessage">
+        <h2 id="resetSystemDialogTitle">Konfirmasi Reset Sistem</h2>
+        <p id="resetSystemDialogMessage">Tindakan ini akan menghapus data tamu, sesi login, token reset kata sandi, cache, dan cache lock secara permanen. Data pengguna tidak dihapus. Anda akan keluar dan perlu masuk kembali. Lanjutkan?</p>
+        <div class="reset-dialog__actions">
+            <button class="reset-dialog__cancel" id="cancelResetSystem" type="button">Batal</button>
+            <button class="reset-dialog__confirm" type="submit" form="resetSystemForm">Lanjutkan</button>
+        </div>
+    </dialog>
+    <script>
+        const resetSystemDialog = document.getElementById('resetSystemDialog');
+        document.getElementById('openResetSystemDialog').addEventListener('click', function () {
+            resetSystemDialog.showModal();
+        });
+        document.getElementById('cancelResetSystem').addEventListener('click', function () {
+            resetSystemDialog.close();
+        });
+        resetSystemDialog.addEventListener('click', function (event) {
+            if (event.target === resetSystemDialog) {
+                resetSystemDialog.close();
+            }
+        });
+    </script>
 
     @include('admin.partials.logout-confirmation')
     @include('layouts.loading')
